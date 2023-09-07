@@ -1,6 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Livewire\Mod\ModIndex;
+use App\Models\User;
+use Illuminate\Support\Facades\{Route, Auth};
+use Illuminate\Support\Facades\URL;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +22,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('auth/{provider}', [AuthController::class, 'redirectToProvider']);
+Route::get('auth/{provider}/callback', [AuthController::class, 'handleProviderCallback']);
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -26,7 +34,7 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/mod', function() {
-        return view('livewire.mod');
-    })->name('mod');
+    Route::get('/mod', ModIndex::class)->name('mod');
 });
+
+URL::forceScheme('https');

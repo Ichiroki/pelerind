@@ -43,6 +43,17 @@
                     {{ __('Log in') }}
                 </x-button>
             </div>
+            <div class="text-center">
+                Or Log in With
+            </div>
         </form>
+        {{-- <form action="{{ url('/auth/facebook') }}" method="GET">
+            <div class="flex items-center justify-center mt-4">
+                <x-button class="ml-4">
+                    <i class="bi bi-facebook mr-2"></i>{{ __('Facebook') }}
+                </x-button>
+            </div>
+        </form> --}}
+        <a href={{ url("/auth/facebook") }}><i class="bi bi-facebook mr-2"></i></a>
     </x-authentication-card>
 </x-guest-layout>
